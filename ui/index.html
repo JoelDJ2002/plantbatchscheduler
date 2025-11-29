@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Plant Scheduling Simulator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🏭</span>
+                    <span class="logo-text">Plant Scheduler</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle" title="Toggle Sidebar">
+                    <span class="toggle-icon">◀</span>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Equipment Section -->
+                <div class="nav-section">
+                    <button class="nav-section-header" data-section="equipment">
+                        <span class="section-icon">🛠️</span>
+                        <span class="section-title">Equipment</span>
+                        <span class="section-count" id="equipment-count">0</span>
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="nav-section-content" id="equipment-nav">
+                        <div class="section-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Reactors:</span>
+                                <span class="summary-value" id="reactor-count">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Dryers:</span>
+                                <span class="summary-value" id="dryer-count">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Packagers:</span>
+                                <span class="summary-value" id="packager-count">0</span>
+                            </div>
+                        </div>
+                        <button class="nav-btn" data-tab="equipment">Configure →</button>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div class="nav-section">
+                    <button class="nav-section-header" data-section="orders">
+                        <span class="section-icon">📋</span>
+                        <span class="section-title">Orders</span>
+                        <span class="section-count" id="orders-count">0</span>
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="nav-section-content" id="orders-nav">
+                        <div class="section-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Total Orders:</span>
+                                <span class="summary-value" id="total-orders">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Total Quantity:</span>
+                                <span class="summary-value" id="total-quantity">0 kg</span>
+                            </div>
+                        </div>
+                        <button class="nav-btn" data-tab="orders">Configure →</button>
+                    </div>
+                </div>
+
+                <!-- Changeovers Section -->
+                <div class="nav-section">
+                    <button class="nav-section-header" data-section="changeovers">
+                        <span class="section-icon">⏱️</span>
+                        <span class="section-title">Changeovers</span>
+                        <span class="section-count" id="changeovers-count">0</span>
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="nav-section-content" id="changeovers-nav">
+                        <div class="section-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Defined:</span>
+                                <span class="summary-value" id="defined-changeovers">0</span>
+                            </div>
+                        </div>
+                        <button class="nav-btn" data-tab="changeovers">Configure →</button>
+                    </div>
+                </div>
+
+                <!-- Simulation Section -->
+                <div class="nav-section">
+                    <button class="nav-section-header" data-section="simulation">
+                        <span class="section-icon">⚙️</span>
+                        <span class="section-title">Simulation</span>
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="nav-section-content" id="simulation-nav">
+                        <div class="section-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Duration:</span>
+                                <span class="summary-value" id="sim-duration">30 days</span>
+                            </div>
+                        </div>
+                        <button class="nav-btn" data-tab="simulation">Configure →</button>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="run-simulation-sidebar" class="run-btn">
+                    <span class="run-icon">🚀</span>
+                    <span class="run-text">Run Simulation</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Batch Plant Scheduling Simulator</h1>
+                <p>Configure your plant parameters and run production scheduling simulations</p>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Equipment Configuration -->
+                <section id="equipment" class="tab-content active">
+                    <div class="section-header">
+                        <h2>🛠️ Equipment Configuration</h2>
+                        <p>Configure your plant's equipment. IDs will be auto-generated based on type.</p>
+                    </div>
+
+                    <div id="equipment-list" class="items-list">
+                        <!-- Equipment items will be added here dynamically -->
+                    </div>
+
+                    <button id="add-equipment" class="btn btn-primary">
+                        <span class="btn-icon">+</span> Add Equipment
+                    </button>
+                </section>
+
+                <!-- Orders Configuration -->
+                <section id="orders" class="tab-content">
+                    <div class="section-header">
+                        <h2>📋 Orders Configuration</h2>
+                        <p>Configure customer orders. IDs will be auto-generated.</p>
+                    </div>
+
+                    <div id="orders-list" class="items-list">
+                        <!-- Order items will be added here dynamically -->
+                    </div>
+
+                    <button id="add-order" class="btn btn-primary">
+                        <span class="btn-icon">+</span> Add Order
+                    </button>
+                </section>
+
+                <!-- Changeover Times -->
+                <section id="changeovers" class="tab-content">
+                    <div class="section-header">
+                        <h2>⏱️ Changeover Times</h2>
+                        <p>Set changeover times between different products (in hours).</p>
+                    </div>
+
+                    <div id="changeovers-list" class="items-list">
+                        <!-- Changeover items will be added here dynamically -->
+                    </div>
+
+                    <button id="add-changeover" class="btn btn-primary">
+                        <span class="btn-icon">+</span> Add Changeover
+                    </button>
+                </section>
+
+                <!-- Simulation Settings -->
+                <section id="simulation" class="tab-content">
+                    <div class="section-header">
+                        <h2>⚙️ Simulation Settings</h2>
+                        <p>Configure simulation parameters.</p>
+                    </div>
+
+                    <div class="settings-card">
+                        <div class="form-group">
+                            <label for="simulation-days">Simulation Time (days):</label>
+                            <input type="number" id="simulation-days" value="30" min="1" max="365">
+                        </div>
+
+                        <div class="simulation-actions">
+                            <button id="run-simulation" class="btn btn-success">
+                                <span class="btn-icon">🚀</span> Run Simulation
+                            </button>
+                            <button id="save-config" class="btn btn-secondary">
+                                <span class="btn-icon">💾</span> Save Configuration
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="results" class="results-section hidden">
+                    <div class="section-header">
+                        <h2>📊 Simulation Results</h2>
+                        <div class="results-actions">
+                            <button id="analyze-ai" class="btn btn-ai">
+                                <span class="btn-icon">🤖</span> Analyze with AI
+                            </button>
+                            <button id="close-results" class="btn btn-small btn-secondary">Close</button>
+                        </div>
+                    </div>
+                    <div id="results-content">
+                        <!-- Results will be displayed here -->
+                    </div>
+                </section>
+
+                <!-- AI Analysis Section -->
+                <section id="ai-analysis" class="ai-analysis-section hidden">
+                    <div class="section-header">
+                        <h2>🤖 AI Analysis</h2>
+                        <button id="close-ai-analysis" class="btn btn-small btn-secondary">Close</button>
+                    </div>
+                    <div id="ai-analysis-content">
+                        <!-- AI analysis will be displayed here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
