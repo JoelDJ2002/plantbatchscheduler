@@ -18,10 +18,13 @@ A web-based interface for configuring and running batch plant production schedul
 │   ├── index.html        # Main HTML page
 │   ├── styles.css        # CSS styling
 │   └── script.js         # JavaScript logic
-├── server.py             # FastAPI server
-├── car_dict_input.py     # Core simulation logic
+├── cli/                   # Command-line interface
+│   └── main.py           # CLI entry point
+├── app.py                # FastAPI server
+├── simulator.py          # Core simulation engine
+├── ai_analyzer.py        # AI/LLM analysis module
 ├── requirements.txt      # Python dependencies
-└── README.md            # This file
+└── README.md             # This file
 ```
 
 ## Quick Start
@@ -33,7 +36,7 @@ A web-based interface for configuring and running batch plant production schedul
 
 2. **Start the Server**
    ```bash
-   python server.py
+   python app.py
    ```
 
 3. **Open Your Browser**
@@ -72,6 +75,7 @@ A web-based interface for configuring and running batch plant production schedul
 
 - `GET /` - Main web interface
 - `POST /run-simulation` - Run simulation with configuration
+- `POST /analyze-results` - Analyze results with AI (Groq LLM)
 - `GET /health` - Health check
 
 ## Configuration File
@@ -106,7 +110,8 @@ The UI is built with vanilla HTML, CSS, and JavaScript for maximum compatibility
 ## Troubleshooting
 
 - Ensure all files are in the correct directory structure
-- Check that `car_dict_input.py` is in the same directory as `server.py`
+- Check that `simulator.py` is in the same directory as `app.py`
 - Verify all Python dependencies are installed
+- Set `GROQ_API_KEY` in `.env` file for AI analysis feature
 - Check browser console for JavaScript errors
 

@@ -57,7 +57,7 @@ async def run_simulation(config: PlantConfig):
         from io import StringIO
         import contextlib
 
-        # Import the main function from car_dict_input.py
+        # Import the main function from simulator.py
         sys.path.insert(0, '.')  # Add current directory to path
 
         # Capture stdout
@@ -65,8 +65,8 @@ async def run_simulation(config: PlantConfig):
         with contextlib.redirect_stdout(output_buffer):
             try:
                 # Import and run the main function with our config
-                import car_dict_input
-                car_dict_input.main(config.dict())
+                import simulator
+                simulator.main(config.dict())
             except Exception as e:
                 return JSONResponse(
                     status_code=500,
@@ -111,7 +111,7 @@ async def analyze_results():
             simulation_data = json.load(f)
         
         # Import and call the LLM analysis function
-        from llm_gy import analyze_scheduling_results_data
+        from ai_analyzer import analyze_scheduling_results_data
         
         analysis = analyze_scheduling_results_data(simulation_data)
         
@@ -137,9 +137,9 @@ if __name__ == "__main__":
         print("Error: UI directory not found. Please run this script from the project root.")
         sys.exit(1)
 
-    # Ensure car_dict_input.py exists
-    if not Path("car_dict_input.py").exists():
-        print("Error: car_dict_input.py not found in current directory.")
+    # Ensure simulator.py exists
+    if not Path("simulator.py").exists():
+        print("Error: simulator.py not found in current directory.")
         sys.exit(1)
 
     print("🚀 Starting Batch Plant Scheduling Simulator...")
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     print("   GET  /health        - Health check")
 
     uvicorn.run(
-        "server:app",
+        "app:app",
         host="0.0.0.0",
         port=8000,
         reload=True,
