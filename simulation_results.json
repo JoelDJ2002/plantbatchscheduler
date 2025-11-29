@@ -1,0 +1,316 @@
+{
+  "plant_config": {
+    "equipment": [
+      {
+        "id": "R-101",
+        "type": "Reactor",
+        "capacity": 500
+      },
+      {
+        "id": "R-102",
+        "type": "Reactor",
+        "capacity": 500
+      },
+      {
+        "id": "D-201",
+        "type": "Dryer",
+        "capacity": 200
+      },
+      {
+        "id": "P-301",
+        "type": "Packager",
+        "capacity": 100
+      }
+    ],
+    "products": [
+      {
+        "id": "A",
+        "name": "Product-A",
+        "batch_size": 100,
+        "total_processing_time": 14,
+        "recipe": [
+          {
+            "step_name": "Reaction",
+            "equipment_type": "Reactor",
+            "duration": 4
+          },
+          {
+            "step_name": "Drying",
+            "equipment_type": "Dryer",
+            "duration": 8
+          },
+          {
+            "step_name": "Packaging",
+            "equipment_type": "Packager",
+            "duration": 2
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "name": "Product-B",
+        "batch_size": 80,
+        "total_processing_time": 13.5,
+        "recipe": [
+          {
+            "step_name": "Reaction",
+            "equipment_type": "Reactor",
+            "duration": 6
+          },
+          {
+            "step_name": "Drying",
+            "equipment_type": "Dryer",
+            "duration": 6
+          },
+          {
+            "step_name": "Packaging",
+            "equipment_type": "Packager",
+            "duration": 1.5
+          }
+        ]
+      },
+      {
+        "id": "C",
+        "name": "Product-C",
+        "batch_size": 120,
+        "total_processing_time": 15.5,
+        "recipe": [
+          {
+            "step_name": "Reaction",
+            "equipment_type": "Reactor",
+            "duration": 3
+          },
+          {
+            "step_name": "Drying",
+            "equipment_type": "Dryer",
+            "duration": 10
+          },
+          {
+            "step_name": "Packaging",
+            "equipment_type": "Packager",
+            "duration": 2.5
+          }
+        ]
+      }
+    ],
+    "orders": [
+      {
+        "id": "1",
+        "product_id": "A",
+        "quantity": 1000,
+        "due_date": 1,
+        "priority": 2
+      },
+      {
+        "id": "2",
+        "product_id": "B",
+        "quantity": 800,
+        "due_date": 4,
+        "priority": 2
+      },
+      {
+        "id": "3",
+        "product_id": "C",
+        "quantity": 1200,
+        "due_date": 5,
+        "priority": 4
+      },
+      {
+        "id": "4",
+        "product_id": "A",
+        "quantity": 600,
+        "due_date": 3,
+        "priority": 1
+      },
+      {
+        "id": "5",
+        "product_id": "B",
+        "quantity": 500,
+        "due_date": 2,
+        "priority": 3
+      },
+      {
+        "id": "6",
+        "product_id": "C",
+        "quantity": 400,
+        "due_date": 6,
+        "priority": 2
+      }
+    ]
+  },
+  "algorithm_results": [
+    {
+      "algorithm": "FIFO",
+      "makespan": 15.62,
+      "total_tardiness": 40.77,
+      "late_orders": 5,
+      "order_details": [
+        {
+          "order_id": "1",
+          "completion_day": 9.46,
+          "due_day": 1,
+          "tardiness_days": 8.46,
+          "num_batches": 10
+        },
+        {
+          "order_id": "2",
+          "completion_day": 11.94,
+          "due_day": 4,
+          "tardiness_days": 7.94,
+          "num_batches": 10
+        },
+        {
+          "order_id": "3",
+          "completion_day": 4.4,
+          "due_day": 5,
+          "tardiness_days": 0,
+          "num_batches": 10
+        },
+        {
+          "order_id": "4",
+          "completion_day": 15.62,
+          "due_day": 3,
+          "tardiness_days": 12.62,
+          "num_batches": 6
+        },
+        {
+          "order_id": "5",
+          "completion_day": 6.1,
+          "due_day": 2,
+          "tardiness_days": 4.1,
+          "num_batches": 7
+        },
+        {
+          "order_id": "6",
+          "completion_day": 13.65,
+          "due_day": 6,
+          "tardiness_days": 7.65,
+          "num_batches": 4
+        }
+      ],
+      "utilization": {
+        "Reactor": "17.4%",
+        "Dryer": "51.4%",
+        "Packager": "12.8%"
+      }
+    },
+    {
+      "algorithm": "EDD",
+      "makespan": 15.69,
+      "total_tardiness": 34.75,
+      "late_orders": 6,
+      "order_details": [
+        {
+          "order_id": "1",
+          "completion_day": 3.58,
+          "due_day": 1,
+          "tardiness_days": 2.58,
+          "num_batches": 10
+        },
+        {
+          "order_id": "2",
+          "completion_day": 9.81,
+          "due_day": 4,
+          "tardiness_days": 5.81,
+          "num_batches": 10
+        },
+        {
+          "order_id": "3",
+          "completion_day": 14.02,
+          "due_day": 5,
+          "tardiness_days": 9.02,
+          "num_batches": 10
+        },
+        {
+          "order_id": "4",
+          "completion_day": 7.33,
+          "due_day": 3,
+          "tardiness_days": 4.33,
+          "num_batches": 6
+        },
+        {
+          "order_id": "5",
+          "completion_day": 5.31,
+          "due_day": 2,
+          "tardiness_days": 3.31,
+          "num_batches": 7
+        },
+        {
+          "order_id": "6",
+          "completion_day": 15.69,
+          "due_day": 6,
+          "tardiness_days": 9.69,
+          "num_batches": 4
+        }
+      ],
+      "utilization": {
+        "Reactor": "16.3%",
+        "Dryer": "51.4%",
+        "Packager": "12.8%"
+      }
+    },
+    {
+      "algorithm": "Critical Ratio",
+      "makespan": 15.69,
+      "total_tardiness": 37.42,
+      "late_orders": 6,
+      "order_details": [
+        {
+          "order_id": "1",
+          "completion_day": 3.58,
+          "due_day": 1,
+          "tardiness_days": 2.58,
+          "num_batches": 10
+        },
+        {
+          "order_id": "2",
+          "completion_day": 7.81,
+          "due_day": 4,
+          "tardiness_days": 3.81,
+          "num_batches": 10
+        },
+        {
+          "order_id": "3",
+          "completion_day": 12.02,
+          "due_day": 5,
+          "tardiness_days": 7.02,
+          "num_batches": 10
+        },
+        {
+          "order_id": "4",
+          "completion_day": 14.0,
+          "due_day": 3,
+          "tardiness_days": 11.0,
+          "num_batches": 6
+        },
+        {
+          "order_id": "5",
+          "completion_day": 5.31,
+          "due_day": 2,
+          "tardiness_days": 3.31,
+          "num_batches": 7
+        },
+        {
+          "order_id": "6",
+          "completion_day": 15.69,
+          "due_day": 6,
+          "tardiness_days": 9.69,
+          "num_batches": 4
+        }
+      ],
+      "utilization": {
+        "Reactor": "17.2%",
+        "Dryer": "51.4%",
+        "Packager": "12.8%"
+      }
+    }
+  ],
+  "bottlenecks": {
+    "equipment": "Dryer",
+    "utilization": 0.51,
+    "constraining_orders": [
+      6,
+      3
+    ]
+  }
+}

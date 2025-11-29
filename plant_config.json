@@ -1,0 +1,170 @@
+{
+  "equipment": [
+    {
+      "id": "R-101",
+      "type": "Reactor",
+      "capacity": 500
+    },
+    {
+      "id": "R-102",
+      "type": "Reactor",
+      "capacity": 500
+    },
+    {
+      "id": "D-201",
+      "type": "Dryer",
+      "capacity": 200
+    },
+    {
+      "id": "P-301",
+      "type": "Packager",
+      "capacity": 100
+    }
+  ],
+  "products": [
+    {
+      "id": "A",
+      "name": "Product-A",
+      "batch_size": 100,
+      "recipe": [
+        {
+          "step_name": "Reaction",
+          "equipment_type": "Reactor",
+          "duration": 4
+        },
+        {
+          "step_name": "Drying",
+          "equipment_type": "Dryer",
+          "duration": 8
+        },
+        {
+          "step_name": "Packaging",
+          "equipment_type": "Packager",
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "name": "Product-B",
+      "batch_size": 80,
+      "recipe": [
+        {
+          "step_name": "Reaction",
+          "equipment_type": "Reactor",
+          "duration": 6
+        },
+        {
+          "step_name": "Drying",
+          "equipment_type": "Dryer",
+          "duration": 6
+        },
+        {
+          "step_name": "Packaging",
+          "equipment_type": "Packager",
+          "duration": 1.5
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "name": "Product-C",
+      "batch_size": 120,
+      "recipe": [
+        {
+          "step_name": "Reaction",
+          "equipment_type": "Reactor",
+          "duration": 3
+        },
+        {
+          "step_name": "Drying",
+          "equipment_type": "Dryer",
+          "duration": 10
+        },
+        {
+          "step_name": "Packaging",
+          "equipment_type": "Packager",
+          "duration": 2.5
+        }
+      ]
+    }
+  ],
+  "changeovers": [
+    {
+      "from_product": "A",
+      "to_product": "B",
+      "time": 4
+    },
+    {
+      "from_product": "A",
+      "to_product": "C",
+      "time": 6
+    },
+    {
+      "from_product": "B",
+      "to_product": "A",
+      "time": 5
+    },
+    {
+      "from_product": "B",
+      "to_product": "C",
+      "time": 3
+    },
+    {
+      "from_product": "C",
+      "to_product": "A",
+      "time": 8
+    },
+    {
+      "from_product": "C",
+      "to_product": "B",
+      "time": 4
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "product_id": "A",
+      "quantity": 1000,
+      "due_date": 1,
+      "priority": 2
+    },
+    {
+      "id": "2",
+      "product_id": "B",
+      "quantity": 800,
+      "due_date": 4,
+      "priority": 2
+    },
+    {
+      "id": "3",
+      "product_id": "C",
+      "quantity": 1200,
+      "due_date": 5,
+      "priority": 4
+    },
+    {
+      "id": "4",
+      "product_id": "A",
+      "quantity": 600,
+      "due_date": 3,
+      "priority": 1
+    },
+    {
+      "id": "5",
+      "product_id": "B",
+      "quantity": 500,
+      "due_date": 2,
+      "priority": 3
+    },
+    {
+      "id": "6",
+      "product_id": "C",
+      "quantity": 400,
+      "due_date": 6,
+      "priority": 2
+    }
+  ],
+  "hours_per_day": 24,
+  "simulation_time_days": 30
+}
